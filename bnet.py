@@ -34,10 +34,10 @@ def getConditionalProbability(dataSet, display):
     P_NGB   = (count[1] / DATASET_SIZE) / P_B                       # Calculate conditional probability
     P_NGNB  = (count[0] / DATASET_SIZE) / P_NB                      # Calculate conditional probability
 
-    list_P.append(P_GB)
-    list_P.append(P_GNB)
-    list_P.append(P_NGB)
-    list_P.append(P_NGNB)
+    list_P.append(P_GB)                                             # 4
+    list_P.append(P_GNB)                                            # 5
+    list_P.append(P_NGB)                                            # 6
+    list_P.append(P_NGNB)                                           # 7
 
     col = ['G', 'C']                                                # Set the columns of interest
     count = getCount(dataFrame=dataFrame, columns=col)              # Get the count of all combinations of these columns (00, 01, 10, 11)
@@ -47,10 +47,10 @@ def getConditionalProbability(dataSet, display):
     P_GNC   = (count[2] / DATASET_SIZE)                             # Calculate probability
     P_GC    = (count[3] / DATASET_SIZE)                             # Calculate probability
 
-    list_P.append(P_NGNC)
-    list_P.append(P_NGC)
-    list_P.append(P_GNC)
-    list_P.append(P_GC)
+    list_P.append(P_NGNC)                                           # 8
+    list_P.append(P_NGC)                                            # 9
+    list_P.append(P_GNC)                                            # 10
+    list_P.append(P_GC)                                             # 11
 
     col = ['F','G', 'C']                                            # Set the columns of interest
     count = getCount(dataFrame=dataFrame, columns=col)              # Get the count of all combinations of these columns (000, 001, 010, 011, ..)
@@ -64,14 +64,14 @@ def getConditionalProbability(dataSet, display):
     P_FGNC      = ((count[6] / DATASET_SIZE) / P_GNC)               # Calculate conditional probability
     P_FGC       = ((count[7] / DATASET_SIZE) / P_GC)                # Calculate conditional probability
 
-    list_P.append(P_NFNGNC)
-    list_P.append(P_NFNGC)
-    list_P.append(P_NFGNC)
-    list_P.append(P_NFGC)
-    list_P.append(P_FNGNC)
-    list_P.append(P_FNGC)
-    list_P.append(P_FGNC)
-    list_P.append(P_FGC)
+    list_P.append(P_NFNGNC)                                         # 12
+    list_P.append(P_NFNGC)                                          # 13
+    list_P.append(P_NFGNC)                                          # 14
+    list_P.append(P_NFGC)                                           # 15
+    list_P.append(P_FNGNC)                                          # 16
+    list_P.append(P_FNGC)                                           # 17
+    list_P.append(P_FGNC)                                           # 18
+    list_P.append(P_FGC)                                            # 19
 
     # Print calculated values of all probabilities
     if (display):
@@ -117,20 +117,24 @@ def getJointConditionalProbability(dataSet, states):
 
     list_P = getConditionalProbability(dataSet, False)
 
-    if  (BGCF == 0):    print(f"P(!F|!G,!C,!B): {float((count[0] / DATASET_SIZE) / list_P[8])}")
-    elif (BGCF == 1):   print(f"P(F|!G,!C,!B):  {float((count[1] / DATASET_SIZE) / list_P[8])}")
-    elif (BGCF == 2):   print(f"P(!F|!G,C,!B):  {float((count[2] / DATASET_SIZE) / list_P[9])}")
-    elif (BGCF == 3):   print(f"P(F|!G,C,!B):   {float((count[3] / DATASET_SIZE) / list_P[9])}")
-    elif (BGCF == 4):   print(f"P(!F|G,!C,!B):  {float((count[4] / DATASET_SIZE) / list_P[10])}")
-    elif (BGCF == 5):   print(f"P(F|G,!C,!B):   {float((count[5] / DATASET_SIZE) / list_P[10])}")
-    elif (BGCF == 6):   print(f"P(!F|G,C,!B):   {float((count[6] / DATASET_SIZE) / list_P[11])}")
-    elif (BGCF == 9):   print(f"P(F|!G,!C,B):   {float((count[7] / DATASET_SIZE) / list_P[8])}")
-    elif (BGCF == 10):  print(f"P(!F|!G,C,B):   {float((count[8] / DATASET_SIZE) / list_P[9])}")
-    elif (BGCF == 11):  print(f"P(F|!G,C,B):    {float((count[9] / DATASET_SIZE) / list_P[9])}")
-    elif (BGCF == 12):  print(f"P(!F|G,!C,B):   {float((count[10] / DATASET_SIZE) / list_P[10])}")
-    elif (BGCF == 13):  print(f"P(F|G,!C,B):    {float((count[11] / DATASET_SIZE) / list_P[10])}")
-    elif (BGCF == 14):  print(f"P(!F|G,C,B):    {float((count[12] / DATASET_SIZE) / list_P[11])}")
-    elif (BGCF == 15):  print(f"P(F|G,C,B):     {float((count[13] / DATASET_SIZE) / list_P[11])}")
+    if  (BGCF == 0):    print(f"P(!F|!G,!C,!B): {float(list_P[1] * list_P[3] * list_P[7] * list_P[12])}")
+    elif (BGCF == 1):   print(f"P(F|!G,!C,!B):  {float(list_P[1] * list_P[3] * list_P[7] * list_P[16])}")
+    elif (BGCF == 2):   print(f"P(!F|!G,C,!B):  {float(list_P[1] * list_P[2] * list_P[7] * list_P[13])}")
+    elif (BGCF == 3):   print(f"P(F|!G,C,!B):   {float(list_P[1] * list_P[2] * list_P[5] * list_P[17])}")
+    elif (BGCF == 4):   print(f"P(!F|G,!C,!B):  {float(list_P[1] * list_P[3] * list_P[5] * list_P[14])}")
+    elif (BGCF == 5):   print(f"P(F|G,!C,!B):   {float(list_P[1] * list_P[3] * list_P[5] * list_P[18])}")
+    elif (BGCF == 6):   print(f"P(!F|G,C,!B):   {float(list_P[1] * list_P[2] * list_P[5] * list_P[15])}")
+    elif (BGCF == 7):   print(f"P(F|G,C,!B):    {float(list_P[1] * list_P[2] * list_P[5] * list_P[19])}")
+    elif (BGCF == 8):   print(f"P(!F|!G,!C,B):  {float(list_P[0] * list_P[3] * list_P[6] * list_P[12])}")
+    elif (BGCF == 9):   print(f"P(F|!G,!C,B):   {float(list_P[0] * list_P[3] * list_P[6] * list_P[16])}")
+    elif (BGCF == 10):  print(f"P(!F|!G,C,B):   {float(list_P[0] * list_P[2] * list_P[6] * list_P[13])}")
+    elif (BGCF == 11):  print(f"P(F|!G,C,B):    {float(list_P[0] * list_P[2] * list_P[6] * list_P[17])}")
+    elif (BGCF == 12):  print(f"P(!F|G,!C,B):   {float(list_P[0] * list_P[3] * list_P[4] * list_P[14])}")
+    elif (BGCF == 13):  print(f"P(F|G,!C,B):    {float(list_P[0] * list_P[3] * list_P[4] * list_P[18])}")
+    elif (BGCF == 14):  print(f"P(!F|G,C,B):    {float(list_P[0] * list_P[2] * list_P[4] * list_P[15])}")
+    elif (BGCF == 15):  print(f"P(F|G,C,B):     {float(list_P[0] * list_P[2] * list_P[4] * list_P[19])}")
+
+    print("\n\n")
 
 def main():
     '''
